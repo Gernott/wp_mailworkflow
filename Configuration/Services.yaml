@@ -1,0 +1,14 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  WEBprofil\WpMailworkflow\:
+    resource: '../Classes/*'
+    exclude: '../Classes/Domain/Model/*'
+
+  WEBprofil\WpMailworkflow\Command\SendQueueCommand:
+    tags:
+      - name: 'console.command'
+        command: 'wpmailworkflow:send-queue'

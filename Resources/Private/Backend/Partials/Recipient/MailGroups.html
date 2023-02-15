@@ -1,0 +1,44 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<div class="col-8">
+    <h1>Your Mailqueues</h1>
+    <f:for each="{mailGroups}" as="mailGroup">
+        <h2>{mailGroup.title}</h2>
+        <table class="table table-bordered table-hover">
+            <tr>
+                <th>
+                    <f:translate key="tx_wpmailworkflow_domain_model_mail.title"/>
+                </th>
+                <th>
+                    <f:translate key="tx_wpmailworkflow_domain_model_mail.subject"/>
+                </th>
+                <th>
+                    <f:translate key="tx_wpmailworkflow_domain_model_mail.days_to_send"/>
+                </th>
+                <th>
+                    <f:translate key="tx_wpmailworkflow_domain_model_mail.send_time"/>
+                </th>
+                <th>
+                    <f:translate key="tx_wpmailworkflow_domain_model_mail.attachment"/>
+                </th>
+            </tr>
+            <f:for each="{mailGroup.mails}" as="mail">
+                <tr>
+                    <td>{mail.title}</td>
+                    <td>{mail.subject}</td>
+                    <td>{mail.daysToSend}</td>
+                    <td>
+                        <f:format.date format="H:i">{mail.sendTime}</f:format.date>
+                    </td>
+                    <td>
+                        <f:if condition="{mail.attachment}">
+                            <f:link.file download="true" file="{mail.attachment.originalResource}">
+                                {mail.attachment.originalResource.originalFile.name}
+                            </f:link.file>
+                        </f:if>
+                    </td>
+                </tr>
+            </f:for>
+        </table>
+    </f:for>
+</div>
+</html>

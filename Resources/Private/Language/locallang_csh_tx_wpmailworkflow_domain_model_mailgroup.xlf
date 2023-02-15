@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="EXT:wp_mailworkflow/Resources/Private/Language/locallang_csh_tx_wpmailworkflow_domain_model_mailgroup.xlf" date="2023-02-08T18:20:49Z" product-name="wp_mailworkflow">
+		<header/>
+		<body>
+			<trans-unit id="title.description" resname="title.description">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="mails.description" resname="mails.description">
+				<source>Mails</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

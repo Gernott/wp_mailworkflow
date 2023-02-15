@@ -1,0 +1,87 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<div class="form-group row">
+    <label for="start" class="col-sm-3 col-form-label">
+        <f:translate key="tx_wpmailworkflow_domain_model_recipient.start"/>
+        *
+    </label>
+    <div class="col-sm-9">
+        <f:form.textfield class="form-control" type="date" property="start.date" id="start" required="true"
+                          value="{recipient.start->f:format.date(format:'Y-m-d')}"/>
+        <f:form.hidden property="start.dateFormat" value="Y-m-d"/>
+        <small class="form-text text-muted">
+            Start Date for the first day of sendig.
+        </small>
+    </div>
+</div>
+<div class="form-group row">
+    <label for="firstName" class="col-sm-3 col-form-label">
+        <f:translate key="tx_wpmailworkflow_domain_model_recipient.first_name"/>
+    </label>
+    <div class="col-sm-9">
+        <f:form.textfield class="form-control" property="firstName" id="firstName"/>
+    </div>
+</div>
+<div class="form-group row">
+    <label for="lastName" class="col-sm-3 col-form-label">
+        <f:translate key="tx_wpmailworkflow_domain_model_recipient.last_name"/>
+    </label>
+    <div class="col-sm-9">
+        <f:form.textfield class="form-control" property="lastName" id="lastName"/>
+    </div>
+</div>
+<div class="form-group row">
+    <label for="email" class="col-sm-3 col-form-label">
+        <f:translate key="tx_wpmailworkflow_domain_model_recipient.email"/>
+        *
+    </label>
+    <div class="col-sm-9">
+        <f:form.textfield class="form-control" type="email" property="email" id="email" required="true"/>
+        <small class="form-text text-muted">
+            The E-Mail address, where to send the Mailqueue.
+        </small>
+    </div>
+</div>
+<div class="form-group row">
+    <label for="parameter1" class="col-sm-3 col-form-label">
+        <f:translate key="tx_wpmailworkflow_domain_model_recipient.parameter1"/>
+    </label>
+    <div class="col-sm-9">
+        <f:form.textfield class="form-control" property="parameter1" id="parameter1"/>
+        <small class="form-text text-muted">
+            Optional Parameters for use in the Mailtext.
+        </small>
+    </div>
+</div>
+<div class="form-group row">
+    <label for="parameter2" class="col-sm-3 col-form-label">
+        <f:translate key="tx_wpmailworkflow_domain_model_recipient.parameter2"/>
+    </label>
+    <div class="col-sm-9">
+        <f:form.textfield class="form-control" property="parameter2" id="parameter2"/>
+    </div>
+</div>
+<div class="form-group row">
+    <label for="parameter3" class="col-sm-3 col-form-label">
+        <f:translate key="tx_wpmailworkflow_domain_model_recipient.parameter3"/>
+    </label>
+    <div class="col-sm-9">
+        <f:form.textfield class="form-control" property="parameter3" id="parameter3"/>
+    </div>
+</div>
+<div class="form-group row">
+    <label for="parameter4" class="col-sm-3 col-form-label">
+        <f:translate key="tx_wpmailworkflow_domain_model_recipient.parameter4"/>
+    </label>
+    <div class="col-sm-9">
+        <f:form.textfield class="form-control" property="parameter4" id="parameter4"/>
+    </div>
+</div>
+<div class="form-group row">
+    <label for="parameter5" class="col-sm-3 col-form-label">
+        <f:translate key="tx_wpmailworkflow_domain_model_recipient.parameter5"/>
+    </label>
+    <div class="col-sm-9">
+        <f:form.textfield class="form-control" property="parameter5" id="parameter5"/>
+    </div>
+</div>
+</html>

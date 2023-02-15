@@ -1,0 +1,53 @@
+<html
+        xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+        xmlns:be="http://typo3.org/ns/TYPO3/CMS/Backend/ViewHelpers"
+        data-namespace-typo3-fluid="true">
+
+<f:layout name="Default"/>
+
+<f:section name="Buttons">
+    <be:moduleLayout.button.linkButton
+            icon="actions-view-go-back"
+            title="{f:translate(id: 'LLL:EXT:core/Resources/Private/Language/locallang_core.xlf:labels.goBack')}"
+            link="{f:uri.action(controller: 'Recipient', action: 'list')}"
+    />
+</f:section>
+
+<f:section name="Content">
+    <h1>Edit Recipient</h1>
+
+    <f:flashMessages/>
+
+    <f:render partial="FormErrors"/>
+
+    <f:if condition="{mailGroups}">
+        <f:then>
+            <f:form action="update" name="recipient" object="{recipient}">
+                <div class="row">
+                    <div class="col-4">
+                        <f:render partial="Recipient/FormFields"
+                                  arguments="{recipient: recipient, mailGroups:mailGroups}"/>
+                        <div class="form-group row">
+                            <div class="col-sm-3 col-form-label">
+                                <strong><f:translate key="tx_wpmailworkflow_domain_model_recipient.mail_group"/></strong>
+                            </div>
+                            <div class="col-sm-9">
+                                {recipient.mailGroup.title}<br>
+                                <small class="form-text text-muted">
+                                    The Mailgroup is not changeable, because the Mailqueue is already generated.
+                                </small>                            </div>
+                        </div>
+                    </div>
+                    <f:render partial="Recipient/MailGroups" arguments="{recipient: recipient, mailGroups:mailGroups}"/>
+                </div>
+                <f:form.submit value="Save" class="btn btn-primary"/>
+            </f:form>
+        </f:then>
+        <f:else>
+            <div class="alert alert-danger" role="alert">
+                Error: Create at least one Mailgroup first! Do this in the List Module of TYPO3.
+            </div>
+        </f:else>
+    </f:if>
+</f:section>
+</html>

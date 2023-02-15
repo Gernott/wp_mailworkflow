@@ -1,0 +1,58 @@
+<html
+    xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:be="http://typo3.org/ns/TYPO3/CMS/Backend/ViewHelpers"
+    data-namespace-typo3-fluid="true">
+
+<f:layout name="Default" />
+
+<f:section name="Buttons">
+    <be:moduleLayout.button.linkButton
+        icon="actions-add"
+        title="{f:translate(id: 'LLL:EXT:backend/Resources/Private/Language/locallang_layout.xlf:newRecordGeneral')}"
+        link="{f:uri.action(controller: 'Recipient', action: 'new')}"
+    />
+</f:section>
+
+<f:section name="Content">
+    <h1>Recipients</h1>
+
+    <f:flashMessages />
+
+    <table class="tx_wpmailworkflow table table-bordered table-hover">
+        <tr>
+            <th><f:translate key="tx_wpmailworkflow_domain_model_recipient.start" /></th>
+            <th><f:translate key="tx_wpmailworkflow_domain_model_recipient.first_name" /></th>
+            <th><f:translate key="tx_wpmailworkflow_domain_model_recipient.last_name" /></th>
+            <th><f:translate key="tx_wpmailworkflow_domain_model_recipient.email" /></th>
+            <th><f:translate key="tx_wpmailworkflow_domain_model_recipient.parameter1" /></th>
+            <th><f:translate key="tx_wpmailworkflow_domain_model_recipient.parameter2" /></th>
+            <th><f:translate key="tx_wpmailworkflow_domain_model_recipient.parameter3" /></th>
+            <th><f:translate key="tx_wpmailworkflow_domain_model_recipient.parameter4" /></th>
+            <th><f:translate key="tx_wpmailworkflow_domain_model_recipient.parameter5" /></th>
+            <th><f:translate key="tx_wpmailworkflow_domain_model_mailgroup" /></th>
+            <th></th>
+        </tr>
+        <f:for each="{recipients}" as="recipient">
+            <tr>
+                <td>{recipient.start -> f:format.date(format:'d.m.Y')}</td>
+                <td>{recipient.firstName}</td>
+                <td>{recipient.lastName}</td>
+                <td><f:link.email email="{recipient.email}" /></td>
+                <td>{recipient.parameter1}</td>
+                <td>{recipient.parameter2}</td>
+                <td>{recipient.parameter3}</td>
+                <td>{recipient.parameter4}</td>
+                <td>{recipient.parameter5}</td>
+                <td>{recipient.mailGroup.title}</td>
+                <td class="text-end p-0"><f:link.action action="edit" arguments="{recipient: recipient}" class="btn btn-default btn-sm">Edit</f:link.action> <f:link.action action="delete" onclick="return confirmDelete()" arguments="{recipient: recipient}" class="btn btn-danger btn-sm">Delete</f:link.action></td>
+            </tr>
+        </f:for>
+    </table>
+    <script>
+        function confirmDelete() {
+            return confirm("Are you sure to delete this Recipient with all his unsent Mails from the Queue?");
+        }
+    </script>
+    <f:link.action action="new" class="btn btn-primary">New Recipient</f:link.action>
+</f:section>
+</html>

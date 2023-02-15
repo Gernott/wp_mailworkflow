@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="EXT:wp_mailworkflow/Resources/Private/Language/locallang.xlf" date="2023-02-08T18:20:49Z" product-name="wp_mailworkflow">
+		<header/>
+		<body>
+			<trans-unit id="tx_wpmailworkflow_domain_model_mailgroup" resname="tx_wpmailworkflow_domain_model_mailgroup">
+				<source>Mail Group</source>
+			</trans-unit>
+			<trans-unit id="tx_wpmailworkflow_domain_model_mailgroup.title" resname="tx_wpmailworkflow_domain_model_mailgroup.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_wpmailworkflow_domain_model_mailgroup.mails" resname="tx_wpmailworkflow_domain_model_mailgroup.mails">
+				<source>Mails</source>
+			</trans-unit>
+			<trans-unit id="tx_wpmailworkflow_domain_model_mail" resname="tx_wpmailworkflow_domain_model_mail">
+				<source>Mail</source>
+			</trans-unit>
+			<trans-unit id="tx_wpmailworkflow_domain_model_mail.title" resname="tx_wpmailworkflow_domain_model_mail.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_wpmailworkflow_domain_model_mail.days_to_send" resname="tx_wpmailworkflow_domain_model_mail.days_to_send">
+				<source>Days To Send</source>
+			</trans-unit>
+			<trans-unit id="tx_wpmailworkflow_domain_model_mail.send_time" resname="tx_wpmailworkflow_domain_model_mail.send_time">
+				<source>Send Time</source>
+			</trans-unit>
+			<trans-unit id="tx_wpmailworkflow_domain_model_mail.subject" resname="tx_wpmailworkflow_domain_model_mail.subject">
+				<source>Subject</source>
+			</trans-unit>
+			<trans-unit id="tx_wpmailworkflow_domain_model_mail.mailtext" resname="tx_wpmailworkflow_domain_model_mail.mailtext">
+				<source>Mailtext</source>
+			</trans-unit>
+			<trans-unit id="tx_wpmailworkflow_domain_model_mail.attachment" resname="tx_wpmailworkflow_domain_model_mail.attachment">
+				<source>Attachment</source>
+			</trans-unit>
+			<trans-unit id="tx_wpmailworkflow_domain_model_recipient" resname="tx_wpmailworkflow_domain_model_recipient">
+				<source>Recipient</source>
+			</trans-unit>
+			<trans-unit id="tx_wpmailworkflow_domain_model_recipient.start" resname="tx_wpmailworkflow_domain_model_recipient.start">
+				<source>Start</source>
+			</trans-unit>
+			<trans-unit id="tx_wpmailworkflow_domain_model_recipient.first_name" resname="tx_wpmailworkflow_domain_model_recipient.first_name">
+				<source>First Name</source>
+			</trans-unit>
+			<trans-unit id="tx_wpmailworkflow_domain_model_recipient.last_name" resname="tx_wpmailworkflow_domain_model_recipient.last_name">
+				<source>Last Name</source>
+			</trans-unit>
+			<trans-unit id="tx_wpmailworkflow_domain_model_recipient.email" resname="tx_wpmailworkflow_domain_model_recipient.email">
+				<source>Email</source>
+			</trans-unit>
+			<trans-unit id="tx_wpmailworkflow_domain_model_recipient.parameter1" resname="tx_wpmailworkflow_domain_model_recipient.parameter1">
+				<source>Parameter1</source>
+			</trans-unit>
+			<trans-unit id="tx_wpmailworkflow_domain_model_recipient.parameter2" resname="tx_wpmailworkflow_domain_model_recipient.parameter2">
+				<source>Parameter2</source>
+			</trans-unit>
+			<trans-unit id="tx_wpmailworkflow_domain_model_recipient.parameter3" resname="tx_wpmailworkflow_domain_model_recipient.parameter3">
+				<source>Parameter3</source>
+			</trans-unit>
+			<trans-unit id="tx_wpmailworkflow_domain_model_recipient.parameter4" resname="tx_wpmailworkflow_domain_model_recipient.parameter4">
+				<source>Parameter4</source>
+			</trans-unit>
+			<trans-unit id="tx_wpmailworkflow_domain_model_recipient.parameter5" resname="tx_wpmailworkflow_domain_model_recipient.parameter5">
+				<source>Parameter5</source>
+			</trans-unit>
+			<trans-unit id="tx_wpmailworkflow_domain_model_recipient.mail_group" resname="tx_wpmailworkflow_domain_model_recipient.mail_group">
+				<source>Mail Group</source>
+			</trans-unit>
+			<trans-unit id="tx_wpmailworkflow_domain_model_queue" resname="tx_wpmailworkflow_domain_model_queue">
+				<source>Queue</source>
+			</trans-unit>
+			<trans-unit id="tx_wpmailworkflow_domain_model_queue.is_sent" resname="tx_wpmailworkflow_domain_model_queue.is_sent">
+				<source>Is Sent</source>
+			</trans-unit>
+			<trans-unit id="tx_wpmailworkflow_domain_model_queue.send_at" resname="tx_wpmailworkflow_domain_model_queue.send_at">
+				<source>Send At</source>
+			</trans-unit>
+			<trans-unit id="tx_wpmailworkflow_domain_model_queue.sent" resname="tx_wpmailworkflow_domain_model_queue.sent">
+				<source>Sent</source>
+			</trans-unit>
+			<trans-unit id="tx_wpmailworkflow_domain_model_queue.recipient" resname="tx_wpmailworkflow_domain_model_queue.recipient">
+				<source>Recipient</source>
+			</trans-unit>
+			<trans-unit id="tx_wpmailworkflow_domain_model_queue.mail" resname="tx_wpmailworkflow_domain_model_queue.mail">
+				<source>Mail</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

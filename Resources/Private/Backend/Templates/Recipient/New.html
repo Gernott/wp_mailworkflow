@@ -1,0 +1,56 @@
+<html
+        xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+        xmlns:be="http://typo3.org/ns/TYPO3/CMS/Backend/ViewHelpers"
+        data-namespace-typo3-fluid="true">
+
+<f:layout name="Default"/>
+
+<f:section name="Buttons">
+    <be:moduleLayout.button.linkButton
+            icon="actions-view-go-back"
+            title="{f:translate(id: 'LLL:EXT:core/Resources/Private/Language/locallang_core.xlf:labels.goBack')}"
+            link="{f:uri.action(controller: 'Recipient', action: 'list')}"
+    />
+</f:section>
+
+<f:section name="Content">
+    <h1>New Recipient</h1>
+
+    <f:flashMessages/>
+
+    <f:render partial="FormErrors"/>
+
+    <f:if condition="{mailGroups}">
+        <f:then>
+            <f:form action="create" name="newRecipient" object="{newRecipient}">
+                <div class="row">
+                    <div class="col-4">
+                        <f:render partial="Recipient/FormFields" arguments="{mailGroups:mailGroups}"/>
+                        <div class="form-group row">
+                            <label for="mailGroup" class="col-sm-3 col-form-label">
+                                <f:translate key="tx_wpmailworkflow_domain_model_recipient.mail_group"/>
+                            </label>
+                            <div class="col-sm-9">
+                                <f:form.select class="form-select" property="mailGroup" options="{mailGroups}"
+                                               id="mailGroup" optionLabelField="title"/>
+                            </div>
+                        </div>
+                    </div>
+                    <f:render partial="Recipient/MailGroups" arguments="{recipient: recipient, mailGroups:mailGroups}"/>
+                </div>
+                <f:form.submit value="Create new" class="btn btn-primary"/>
+                <br>
+                <small class="form-text text-muted">
+                    When saving, the mail queue is created. Mails added later to the Mailset are no longer considered,
+                    but changed Mail-Texts are.
+                </small>
+            </f:form>
+        </f:then>
+        <f:else>
+            <div class="alert alert-danger" role="alert">
+                Error: Create at least one Mailgroup first! Do this in the List Module of TYPO3.
+            </div>
+        </f:else>
+    </f:if>
+</f:section>
+</html>

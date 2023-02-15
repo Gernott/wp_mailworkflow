@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="EXT:wp_mailworkflow/Resources/Private/Language/locallang_csh_tx_wpmailworkflow_domain_model_recipient.xlf" date="2023-02-08T18:20:49Z" product-name="wp_mailworkflow">
+		<header/>
+		<body>
+			<trans-unit id="start.description" resname="start.description">
+				<source>Start</source>
+			</trans-unit>
+			<trans-unit id="first_name.description" resname="first_name.description">
+				<source>First name</source>
+			</trans-unit>
+			<trans-unit id="last_name.description" resname="last_name.description">
+				<source>Last name</source>
+			</trans-unit>
+			<trans-unit id="email.description" resname="email.description">
+				<source>email</source>
+			</trans-unit>
+			<trans-unit id="parameter1.description" resname="parameter1.description">
+				<source>Parameter 1</source>
+			</trans-unit>
+			<trans-unit id="parameter2.description" resname="parameter2.description">
+				<source>Parameter 2</source>
+			</trans-unit>
+			<trans-unit id="parameter3.description" resname="parameter3.description">
+				<source>Parameter 3</source>
+			</trans-unit>
+			<trans-unit id="parameter4.description" resname="parameter4.description">
+				<source>Parameter 4</source>
+			</trans-unit>
+			<trans-unit id="parameter5.description" resname="parameter5.description">
+				<source>Parameter 5</source>
+			</trans-unit>
+			<trans-unit id="mail_group.description" resname="mail_group.description">
+				<source>Mailgroup</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

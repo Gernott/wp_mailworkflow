@@ -1,0 +1,51 @@
+<html
+    xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:be="http://typo3.org/ns/TYPO3/CMS/Backend/ViewHelpers"
+    data-namespace-typo3-fluid="true">
+
+<f:layout name="Default" />
+
+<f:section name="Buttons">
+</f:section>
+
+<f:section name="Content">
+    <h1>Listing for Queue</h1>
+    <p>See the last {limit} Mails.</p>
+
+    <f:flashMessages />
+
+    <table class="tx_wpmailworkflow table table-bordered table-hover">
+        <tr>
+            <th><f:translate key="tx_wpmailworkflow_domain_model_queue.send_at" /></th>
+            <th><f:translate key="tx_wpmailworkflow_domain_model_recipient.first_name" />, <f:translate key="tx_wpmailworkflow_domain_model_recipient.last_name" /></th>
+            <th><f:translate key="tx_wpmailworkflow_domain_model_recipient.email" /></th>
+            <th><f:translate key="tx_wpmailworkflow_domain_model_mail.title" /></th>
+            <th><f:translate key="tx_wpmailworkflow_domain_model_queue.is_sent" /></th>
+            <th></th>
+        </tr>
+        <f:for each="{queues}" as="queue">
+            <tr>
+                <td>{queue.sendAt -> f:format.date(format:'d.m.Y H:i')}</td>
+                <td>{queue.recipient.firstName} {queue.recipient.lastName}</td>
+                <td><f:link.email email="{queue.recipient.email}"/></td>
+                <td>{queue.recipient.mailGroup.title}: {queue.mail.title}</td>
+                <td>
+                    <f:if condition="{queue.isSent}">
+                        <f:format.date format="d.m.Y H:i">{queue.sent}</f:format.date>
+                    </f:if>
+                </td>
+                <td class="text-end p-0">
+                    <f:if condition="!{queue.isSent}">
+                        <f:link.action onclick="return confirmDelete()" class="btn btn-danger btn-sm" action="delete" arguments="{queue:queue}">Delete</f:link.action>
+                    </f:if>
+                </td>
+            </tr>
+        </f:for>
+    </table>
+    <script>
+        function confirmDelete() {
+            return confirm("Are you sure?");
+        }
+    </script>
+</f:section>
+</html>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="EXT:wp_mailworkflow/Resources/Private/Language/locallang_csh_tx_wpmailworkflow_domain_model_queue.xlf" date="2023-02-08T18:20:49Z" product-name="wp_mailworkflow">
+		<header/>
+		<body>
+			<trans-unit id="is_sent.description" resname="is_sent.description">
+				<source>Is sent</source>
+			</trans-unit>
+			<trans-unit id="send_at.description" resname="send_at.description">
+				<source>Send at</source>
+			</trans-unit>
+			<trans-unit id="sent.description" resname="sent.description">
+				<source>Sent</source>
+			</trans-unit>
+			<trans-unit id="recipient.description" resname="recipient.description">
+				<source>Recipient</source>
+			</trans-unit>
+			<trans-unit id="mail.description" resname="mail.description">
+				<source>Mail</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

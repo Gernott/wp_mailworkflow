@@ -1,0 +1,15 @@
+module.tx_wpmailworkflow_tools_wpmailworkflowmailworkflow {
+    view {
+        templateRootPaths.0 = EXT:wp_mailworkflow/Resources/Private/Backend/Templates/
+        templateRootPaths.1 = {$module.tx_wpmailworkflow_mailworkflow.view.templateRootPath}
+        partialRootPaths.0 = EXT:wp_mailworkflow/Resources/Private/Backend/Partials/
+        partialRootPaths.1 = {$module.tx_wpmailworkflow_mailworkflow.view.partialRootPath}
+        layoutRootPaths.0 = EXT:wp_mailworkflow/Resources/Private/Backend/Layouts/
+        layoutRootPaths.1 = {$module.tx_wpmailworkflow_mailworkflow.view.layoutRootPath}
+    }
+    settings {
+        queue {
+            limit = 200
+        }
+    }
+}
