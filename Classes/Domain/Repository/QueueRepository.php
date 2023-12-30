@@ -50,7 +50,7 @@ class QueueRepository extends Repository
         $now = new \DateTime();
         $query = $this->createQuery();
         $query->matching(
-            $query->logicalAnd([$query->lessThanOrEqual('sendAt', $now->format('U')), $query->equals('isSent', false)])
+            $query->logicalAnd($query->lessThanOrEqual('sendAt', $now->format('U')), $query->equals('isSent', false))
         );
         return $query->execute();
     }
