@@ -1,4 +1,4 @@
-module.tx_wpmailworkflow_tools_wpmailworkflowmailworkflow {
+module.tx_wpmailworkflow {
     view {
         templateRootPaths.0 = EXT:wp_mailworkflow/Resources/Private/Backend/Templates/
         templateRootPaths.1 = {$module.tx_wpmailworkflow_mailworkflow.view.templateRootPath}
