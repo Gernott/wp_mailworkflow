@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace WEBprofil\WpMailworkflow\Domain\Model;
 
-
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use TYPO3\CMS\Extbase\Annotation\Validate;
+use TYPO3\CMS\Extbase\Domain\Model\FileReference;
+use TYPO3\CMS\Extbase\Annotation\ORM\Cascade;
 /**
  * This file is part of the "Mail Workflow" Extension for TYPO3 CMS.
  *
@@ -13,18 +16,17 @@ namespace WEBprofil\WpMailworkflow\Domain\Model;
  *
  * (c) 2023 Gernot Ploiner <gp@webprofil.at>, WEBprofil - Gernot Ploiner e.U.
  */
-
 /**
  * Mail
  */
-class Mail extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class Mail extends AbstractEntity
 {
 
     /**
      * Title
      *
      * @var string
-     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
+     * @Validate("NotEmpty")
      */
     protected $title = null;
 
@@ -32,7 +34,7 @@ class Mail extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Days to send
      *
      * @var int
-     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
+     * @Validate("NotEmpty")
      */
     protected $daysToSend = 0;
 
@@ -47,7 +49,7 @@ class Mail extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Subject
      *
      * @var string
-     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
+     * @Validate("NotEmpty")
      */
     protected $subject = null;
 
@@ -55,15 +57,15 @@ class Mail extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Mailtext
      *
      * @var string
-     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
+     * @Validate("NotEmpty")
      */
     protected $mailtext = null;
 
     /**
      * Attachment
      *
-     * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
+     * @var FileReference
+     * @Cascade("remove")
      */
     protected $attachment = null;
 
@@ -133,7 +135,7 @@ class Mail extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the attachment
      *
-     * @return \TYPO3\CMS\Extbase\Domain\Model\FileReference
+     * @return FileReference
      */
     public function getAttachment()
     {
@@ -143,10 +145,10 @@ class Mail extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the attachment
      *
-     * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $attachment
+     * @param FileReference $attachment
      * @return void
      */
-    public function setAttachment(\TYPO3\CMS\Extbase\Domain\Model\FileReference $attachment)
+    public function setAttachment(FileReference $attachment)
     {
         $this->attachment = $attachment;
     }

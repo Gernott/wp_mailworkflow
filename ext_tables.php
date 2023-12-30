@@ -10,7 +10,7 @@ defined('TYPO3') || die();
         [
             \WEBprofil\WpMailworkflow\Controller\RecipientController::class => 'list, new, create, edit, update, delete',
             \WEBprofil\WpMailworkflow\Controller\QueueController::class => 'list, delete',
-            
+
         ],
         [
             'access' => 'user,group',

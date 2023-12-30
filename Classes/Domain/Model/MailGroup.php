@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace WEBprofil\WpMailworkflow\Domain\Model;
 
-
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use TYPO3\CMS\Extbase\Annotation\Validate;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use TYPO3\CMS\Extbase\Annotation\ORM\Cascade;
 /**
  * This file is part of the "Mail Workflow" Extension for TYPO3 CMS.
  *
@@ -13,26 +16,25 @@ namespace WEBprofil\WpMailworkflow\Domain\Model;
  *
  * (c) 2023 Gernot Ploiner <gp@webprofil.at>, WEBprofil - Gernot Ploiner e.U.
  */
-
 /**
  * Set
  */
-class MailGroup extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class MailGroup extends AbstractEntity
 {
 
     /**
      * Title
      *
      * @var string
-     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
+     * @Validate("NotEmpty")
      */
     protected $title = null;
 
     /**
      * Mails
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\WEBprofil\WpMailworkflow\Domain\Model\Mail>
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
+     * @var ObjectStorage<Mail>
+     * @Cascade("remove")
      */
     protected $mails = null;
 
@@ -56,7 +58,7 @@ class MailGroup extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     public function initializeObject()
     {
-        $this->mails = $this->mails ?: new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->mails = $this->mails ?: new ObjectStorage();
     }
 
     /**
@@ -83,10 +85,10 @@ class MailGroup extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Adds a Mail
      *
-     * @param \WEBprofil\WpMailworkflow\Domain\Model\Mail $mail
+     * @param Mail $mail
      * @return void
      */
-    public function addMail(\WEBprofil\WpMailworkflow\Domain\Model\Mail $mail)
+    public function addMail(Mail $mail)
     {
         $this->mails->attach($mail);
     }
@@ -94,10 +96,10 @@ class MailGroup extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Removes a Mail
      *
-     * @param \WEBprofil\WpMailworkflow\Domain\Model\Mail $mailToRemove The Mail to be removed
+     * @param Mail $mailToRemove The Mail to be removed
      * @return void
      */
-    public function removeMail(\WEBprofil\WpMailworkflow\Domain\Model\Mail $mailToRemove)
+    public function removeMail(Mail $mailToRemove)
     {
         $this->mails->detach($mailToRemove);
     }
@@ -105,7 +107,7 @@ class MailGroup extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the mails
      *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\WEBprofil\WpMailworkflow\Domain\Model\Mail>
+     * @return ObjectStorage<Mail>
      */
     public function getMails()
     {
@@ -115,10 +117,10 @@ class MailGroup extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the mails
      *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\WEBprofil\WpMailworkflow\Domain\Model\Mail> $mails
+     * @param ObjectStorage<Mail> $mails
      * @return void
      */
-    public function setMails(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $mails)
+    public function setMails(ObjectStorage $mails)
     {
         $this->mails = $mails;
     }

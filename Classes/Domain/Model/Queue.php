@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace WEBprofil\WpMailworkflow\Domain\Model;
 
-
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use TYPO3\CMS\Extbase\Annotation\Validate;
 /**
  * This file is part of the "Mail Workflow" Extension for TYPO3 CMS.
  *
@@ -13,11 +14,10 @@ namespace WEBprofil\WpMailworkflow\Domain\Model;
  *
  * (c) 2023 Gernot Ploiner <gp@webprofil.at>, WEBprofil - Gernot Ploiner e.U.
  */
-
 /**
  * Log
  */
-class Queue extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class Queue extends AbstractEntity
 {
 
     /**
@@ -31,7 +31,7 @@ class Queue extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Send at
      *
      * @var \DateTime
-     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
+     * @Validate("NotEmpty")
      */
     protected $sendAt = null;
 
@@ -45,21 +45,21 @@ class Queue extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Recipient
      *
-     * @var \WEBprofil\WpMailworkflow\Domain\Model\Recipient
+     * @var Recipient
      */
     protected $recipient = null;
 
     /**
      * Mail
      *
-     * @var \WEBprofil\WpMailworkflow\Domain\Model\Mail
+     * @var Mail
      */
     protected $mail = null;
 
     /**
      * Returns the recipient
      *
-     * @return \WEBprofil\WpMailworkflow\Domain\Model\Recipient
+     * @return Recipient
      */
     public function getRecipient()
     {
@@ -69,10 +69,10 @@ class Queue extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the recipient
      *
-     * @param \WEBprofil\WpMailworkflow\Domain\Model\Recipient $recipient
+     * @param Recipient $recipient
      * @return void
      */
-    public function setRecipient(\WEBprofil\WpMailworkflow\Domain\Model\Recipient $recipient)
+    public function setRecipient(Recipient $recipient)
     {
         $this->recipient = $recipient;
     }
@@ -80,7 +80,7 @@ class Queue extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the mail
      *
-     * @return \WEBprofil\WpMailworkflow\Domain\Model\Mail
+     * @return Mail
      */
     public function getMail()
     {
@@ -90,10 +90,10 @@ class Queue extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the mail
      *
-     * @param \WEBprofil\WpMailworkflow\Domain\Model\Mail $mail
+     * @param Mail $mail
      * @return void
      */
-    public function setMail(\WEBprofil\WpMailworkflow\Domain\Model\Mail $mail)
+    public function setMail(Mail $mail)
     {
         $this->mail = $mail;
     }

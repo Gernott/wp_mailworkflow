@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace WEBprofil\WpMailworkflow\Domain\Model;
 
-
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use TYPO3\CMS\Extbase\Annotation\Validate;
 /**
  * This file is part of the "Mail Workflow" Extension for TYPO3 CMS.
  *
@@ -13,18 +14,17 @@ namespace WEBprofil\WpMailworkflow\Domain\Model;
  *
  * (c) 2023 Gernot Ploiner <gp@webprofil.at>, WEBprofil - Gernot Ploiner e.U.
  */
-
 /**
  * Recipient
  */
-class Recipient extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class Recipient extends AbstractEntity
 {
 
     /**
      * Start
      *
      * @var \DateTime
-     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
+     * @Validate("NotEmpty")
      */
     protected $start = null;
 
@@ -46,7 +46,7 @@ class Recipient extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * email
      *
      * @var string
-     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
+     * @Validate("NotEmpty")
      */
     protected $email = null;
 
@@ -88,7 +88,7 @@ class Recipient extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Object
      *
-     * @var \WEBprofil\WpMailworkflow\Domain\Model\MailGroup
+     * @var MailGroup
      */
     protected $mailGroup = null;
 
@@ -284,7 +284,7 @@ class Recipient extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the mailGroup
      *
-     * @return \WEBprofil\WpMailworkflow\Domain\Model\MailGroup mailGroup
+     * @return MailGroup mailGroup
      */
     public function getMailGroup()
     {
@@ -294,10 +294,10 @@ class Recipient extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the mailGroup
      *
-     * @param \WEBprofil\WpMailworkflow\Domain\Model\MailGroup $mailGroup
+     * @param MailGroup $mailGroup
      * @return void
      */
-    public function setMailGroup(\WEBprofil\WpMailworkflow\Domain\Model\MailGroup $mailGroup)
+    public function setMailGroup(MailGroup $mailGroup)
     {
         $this->mailGroup = $mailGroup;
     }

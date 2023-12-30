@@ -7,7 +7,6 @@ $EM_CONF[$_EXTKEY] = [
     'author' => 'Gernot Ploiner',
     'author_email' => 'gp@webprofil.at',
     'state' => 'stable',
-    'clearCacheOnLoad' => 0,
     'version' => '2.0.0',
     'constraints' => [
         'depends' => [

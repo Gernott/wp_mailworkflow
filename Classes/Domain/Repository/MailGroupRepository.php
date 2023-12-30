@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace WEBprofil\WpMailworkflow\Domain\Repository;
 
+use TYPO3\CMS\Extbase\Persistence\Repository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\Generic\QuerySettingsInterface;
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
@@ -20,7 +21,7 @@ use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 /**
  * The repository for MailGroups
  */
-class MailGroupRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+class MailGroupRepository extends Repository
 {
     public function initializeObject()
     {

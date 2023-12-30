@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace WEBprofil\WpMailworkflow\Domain\Repository;
 
+use TYPO3\CMS\Extbase\Persistence\Repository;
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
+use TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\Generic\QuerySettingsInterface;
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
@@ -21,7 +24,7 @@ use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 /**
  * The repository for Queues
  */
-class QueueRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+class QueueRepository extends Repository
 {
 
     protected $defaultOrderings = array(
@@ -39,23 +42,20 @@ class QueueRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     /**
      * Method for scheduler: doesn't respect storage page!
      *
-     * @return object[]|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
+     * @return object[]|QueryResultInterface
+     * @throws InvalidQueryException
      */
-    public function findToSend(): \TYPO3\CMS\Extbase\Persistence\QueryResultInterface|array
+    public function findToSend(): QueryResultInterface|array
     {
         $now = new \DateTime();
         $query = $this->createQuery();
         $query->matching(
-            $query->logicalAnd(
-                $query->lessThanOrEqual('sendAt', $now->format('U')),
-                $query->equals('isSent', false)
-            )
+            $query->logicalAnd([$query->lessThanOrEqual('sendAt', $now->format('U')), $query->equals('isSent', false)])
         );
         return $query->execute();
     }
 
-    public function findLast(int $limit): \TYPO3\CMS\Extbase\Persistence\QueryResultInterface|array
+    public function findLast(int $limit): QueryResultInterface|array
     {
         $query = $this->createQuery();
         $query->setLimit($limit);

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace WEBprofil\WpMailworkflow\Controller;
 
+use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
+use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
@@ -80,7 +82,7 @@ class RecipientController extends ActionController
      * action edit
      *
      * @param Recipient $recipient
-     * @TYPO3\CMS\Extbase\Annotation\IgnoreValidation("recipient")
+     * @IgnoreValidation("recipient")
      * @return ResponseInterface
      */
     public function editAction(Recipient $recipient): ResponseInterface
@@ -123,7 +125,7 @@ class RecipientController extends ActionController
     /**
      * @param Recipient $recipient
      * @return void
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
+     * @throws IllegalObjectTypeException
      */
     private function createQueue(Recipient $recipient): void
     {
