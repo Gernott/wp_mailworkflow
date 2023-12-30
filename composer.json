@@ -1,5 +1,6 @@
 {
     "name": "webprofil/wp-mailworkflow",
+    "version": "2.0.0",
     "type": "typo3-cms-extension",
     "description": "Create a set of mails with a timeline to send for each user",
     "authors": [
@@ -10,7 +11,7 @@
     ],
     "license": "GPL-2.0-or-later",
     "require": {
-        "typo3/cms-core": "^11.5"
+        "typo3/cms-core": "^12.4"
     },
     "require-dev": {
         "typo3/testing-framework": "^6.9.0"
