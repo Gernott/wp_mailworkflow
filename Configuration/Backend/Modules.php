@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 return [
-    'web_module' => [
+    'wp_mailworkflow' => [
         'parent' => 'tools',
         'access' => 'user',
         'workspaces' => 'live',

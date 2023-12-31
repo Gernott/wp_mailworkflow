@@ -3,17 +3,5 @@
     xmlns:be="http://typo3.org/ns/TYPO3/CMS/Backend/ViewHelpers"
     data-namespace-typo3-fluid="true">
 
-<be:moduleLayout>
-    <f:be.pageRenderer />
-
-    <be:moduleLayout.menu identifier="ModuleMenu">
-        <be:moduleLayout.menuItem label="Recipients" uri="{f:uri.action(controller: 'Recipient', action: 'list')}" />
-        <be:moduleLayout.menuItem label="Queue" uri="{f:uri.action(controller: 'Queue', action: 'list')}" />
-    </be:moduleLayout.menu>
-
-    <f:render section="Buttons" />
-    <be:moduleLayout.button.shortcutButton displayName="Shortcut" />
-
     <f:render section="Content" />
-</be:moduleLayout>
 </html>

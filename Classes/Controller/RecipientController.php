@@ -4,18 +4,22 @@ declare(strict_types=1);
 
 namespace WEBprofil\WpMailworkflow\Controller;
 
+use TYPO3\CMS\Backend\Template\Components\ButtonBar;
+use TYPO3\CMS\Core\Imaging\Icon;
+use TYPO3\CMS\Core\Imaging\IconFactory;
 use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
 use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use WEBprofil\WpMailworkflow\Domain\Model\Queue;
 use WEBprofil\WpMailworkflow\Domain\Model\Recipient;
 use WEBprofil\WpMailworkflow\Domain\Repository\MailGroupRepository;
 use WEBprofil\WpMailworkflow\Domain\Repository\QueueRepository;
 use WEBprofil\WpMailworkflow\Domain\Repository\RecipientRepository;
+use TYPO3\CMS\Backend\Attribute\AsController;
+use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 
 /**
  * This file is part of the "Mail Workflow" Extension for TYPO3 CMS.
@@ -29,10 +33,13 @@ use WEBprofil\WpMailworkflow\Domain\Repository\RecipientRepository;
 /**
  * RecipientController
  */
+#[AsController]
 class RecipientController extends ActionController
 {
 
     public function __construct(
+        protected readonly ModuleTemplateFactory $moduleTemplateFactory,
+        protected readonly IconFactory $iconFactory,
         private readonly RecipientRepository   $recipientRepository,
         private readonly QueueRepository       $queueRepository,
         private readonly MailGroupRepository   $mailGroupRepository
@@ -47,9 +54,19 @@ class RecipientController extends ActionController
      */
     public function listAction(): ResponseInterface
     {
+        // use TYPO3 BE-Layout:
+        $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
+        $buttonBar = $moduleTemplate->getDocHeaderComponent()->getButtonBar();
+
+        // load data:
         $recipients = $this->recipientRepository->findAll();
         $this->view->assign('recipients', $recipients);
-        return $this->htmlResponse();
+
+        $this->shortcutButton($buttonBar);
+        $this->queueButton($buttonBar);
+
+        $moduleTemplate->setContent($this->view->render());
+        return $this->htmlResponse($moduleTemplate->renderContent());
     }
 
     /**
@@ -59,9 +76,19 @@ class RecipientController extends ActionController
      */
     public function newAction(): ResponseInterface
     {
+        // use TYPO3 BE-Layout:
+        $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
+        $buttonBar = $moduleTemplate->getDocHeaderComponent()->getButtonBar();
+
+        // load data:
         $mailGroups = $this->mailGroupRepository->findAll();
         $this->view->assign('mailGroups', $mailGroups);
-        return $this->htmlResponse();
+
+        $this->shortcutButton($buttonBar);
+        $this->queueButton($buttonBar);
+
+        $moduleTemplate->setContent($this->view->render());
+        return $this->htmlResponse($moduleTemplate->renderContent());
     }
 
     /**
@@ -87,10 +114,20 @@ class RecipientController extends ActionController
      */
     public function editAction(Recipient $recipient): ResponseInterface
     {
+        // use TYPO3 BE-Layout:
+        $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
+        $buttonBar = $moduleTemplate->getDocHeaderComponent()->getButtonBar();
+
+        // load data:
         $mailGroups = $this->mailGroupRepository->findAll();
         $this->view->assign('mailGroups', $mailGroups);
         $this->view->assign('recipient', $recipient);
-        return $this->htmlResponse();
+
+        $this->shortcutButton($buttonBar);
+        $this->queueButton($buttonBar);
+
+        $moduleTemplate->setContent($this->view->render());
+        return $this->htmlResponse($moduleTemplate->renderContent());
     }
 
     /**
@@ -147,4 +184,27 @@ class RecipientController extends ActionController
             $this->queueRepository->add($queue);
         }
     }
+
+
+    // shortcut menu Button:
+    private function shortcutButton($buttonBar)
+    {
+        $shortcutButton = $buttonBar->makeShortcutButton()
+            ->setRouteIdentifier('wp_mailworkflow')
+            ->setDisplayName('Mailworkflow');
+        $buttonBar->addButton($shortcutButton, ButtonBar::BUTTON_POSITION_RIGHT);
+    }
+
+    private function queueButton($buttonBar)
+    {
+        // Queue Button:
+        $url = $this->uriBuilder->reset()->uriFor('list', [], 'Queue');
+        $list = $buttonBar->makeLinkButton()
+            ->setHref($url)
+            ->setTitle('Queue')
+            ->setShowLabelText('Link')
+            ->setIcon($this->iconFactory->getIcon('actions-heart', Icon::SIZE_SMALL));
+        $buttonBar->addButton($list, ButtonBar::BUTTON_POSITION_LEFT, 1);
+    }
+
 }
