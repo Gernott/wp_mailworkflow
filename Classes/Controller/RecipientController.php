@@ -8,6 +8,7 @@ use TYPO3\CMS\Backend\Template\Components\ButtonBar;
 use TYPO3\CMS\Core\Imaging\Icon;
 use TYPO3\CMS\Core\Imaging\IconFactory;
 use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
+use TYPO3\CMS\Extbase\Http\ForwardResponse;
 use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -102,7 +103,7 @@ class RecipientController extends ActionController
         $persistenceManager = GeneralUtility::makeInstance(PersistenceManager::class);
         $persistenceManager->persistAll();
         $this->createQueue($newRecipient);
-        $this->redirect('list');
+        return (new ForwardResponse('list'));
     }
 
     /**
@@ -138,7 +139,7 @@ class RecipientController extends ActionController
     public function updateAction(Recipient $recipient)
     {
         $this->recipientRepository->update($recipient);
-        $this->redirect('list');
+        return (new ForwardResponse('list'));
     }
 
     /**
@@ -146,7 +147,7 @@ class RecipientController extends ActionController
      *
      * @param Recipient $recipient
      */
-    public function deleteAction(Recipient $recipient): void
+    public function deleteAction(Recipient $recipient): ForwardResponse
     {
         $queues = $this->queueRepository->findByRecipient($recipient);
         foreach ($queues as $queue) {
@@ -156,7 +157,7 @@ class RecipientController extends ActionController
             }
         }
         $this->recipientRepository->remove($recipient);
-        $this->redirect('list');
+        return (new ForwardResponse('list'));
     }
 
     /**

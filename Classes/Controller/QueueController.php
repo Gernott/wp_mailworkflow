@@ -8,6 +8,7 @@ use TYPO3\CMS\Backend\Template\Components\ButtonBar;
 use TYPO3\CMS\Core\Imaging\Icon;
 use TYPO3\CMS\Core\Imaging\IconFactory;
 use Psr\Http\Message\ResponseInterface;
+use TYPO3\CMS\Extbase\Http\ForwardResponse;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Mvc\Exception\StopActionException;
 use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
@@ -68,14 +69,14 @@ class QueueController extends ActionController
      * action delete
      *
      * @param Queue $queue
-     * @return void
+     * @return ForwardResponse
      * @throws StopActionException
      * @throws IllegalObjectTypeException
      */
-    public function deleteAction(Queue $queue): void
+    public function deleteAction(Queue $queue): ForwardResponse
     {
         $this->queueRepository->remove($queue);
-        $this->redirect('list');
+        return (new ForwardResponse('list'));
     }
 
 
