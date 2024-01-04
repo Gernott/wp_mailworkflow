@@ -13,6 +13,7 @@ use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use WEBprofil\WpMailworkflow\Domain\Model\Queue;
 use WEBprofil\WpMailworkflow\Domain\Model\Recipient;
@@ -96,8 +97,10 @@ class RecipientController extends ActionController
      * action create
      *
      * @param Recipient $newRecipient
+     * @return ForwardResponse
+     * @throws IllegalObjectTypeException
      */
-    public function createAction(Recipient $newRecipient)
+    public function createAction(Recipient $newRecipient): ForwardResponse
     {
         $this->recipientRepository->add($newRecipient);
         $persistenceManager = GeneralUtility::makeInstance(PersistenceManager::class);
@@ -135,8 +138,11 @@ class RecipientController extends ActionController
      * action update
      *
      * @param Recipient $recipient
+     * @return ForwardResponse
+     * @throws IllegalObjectTypeException
+     * @throws UnknownObjectException
      */
-    public function updateAction(Recipient $recipient)
+    public function updateAction(Recipient $recipient): ForwardResponse
     {
         $this->recipientRepository->update($recipient);
         return (new ForwardResponse('list'));
@@ -146,6 +152,8 @@ class RecipientController extends ActionController
      * action delete
      *
      * @param Recipient $recipient
+     * @return ForwardResponse
+     * @throws IllegalObjectTypeException
      */
     public function deleteAction(Recipient $recipient): ForwardResponse
     {
@@ -186,9 +194,13 @@ class RecipientController extends ActionController
         }
     }
 
-
-    // shortcut menu Button:
-    private function shortcutButton($buttonBar)
+    /**
+     * shortcut menu Button
+     *
+     * @param $buttonBar
+     * @return void
+     */
+    private function shortcutButton($buttonBar): void
     {
         $shortcutButton = $buttonBar->makeShortcutButton()
             ->setRouteIdentifier('wp_mailworkflow')
@@ -196,7 +208,13 @@ class RecipientController extends ActionController
         $buttonBar->addButton($shortcutButton, ButtonBar::BUTTON_POSITION_RIGHT);
     }
 
-    private function queueButton($buttonBar)
+    /**
+     * queue menu Button
+     *
+     * @param $buttonBar
+     * @return void
+     */
+    private function queueButton($buttonBar): void
     {
         // Queue Button:
         $url = $this->uriBuilder->reset()->uriFor('list', [], 'Queue');

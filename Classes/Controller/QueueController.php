@@ -10,7 +10,6 @@ use TYPO3\CMS\Core\Imaging\IconFactory;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Extbase\Http\ForwardResponse;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
-use TYPO3\CMS\Extbase\Mvc\Exception\StopActionException;
 use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
 use WEBprofil\WpMailworkflow\Domain\Model\Queue;
 use WEBprofil\WpMailworkflow\Domain\Repository\QueueRepository;
@@ -70,7 +69,6 @@ class QueueController extends ActionController
      *
      * @param Queue $queue
      * @return ForwardResponse
-     * @throws StopActionException
      * @throws IllegalObjectTypeException
      */
     public function deleteAction(Queue $queue): ForwardResponse
@@ -79,9 +77,13 @@ class QueueController extends ActionController
         return (new ForwardResponse('list'));
     }
 
-
-    // shortcut menu Button:
-    private function shortcutButton($buttonBar)
+    /**
+     * shortcut menu Button
+     *
+     * @param $buttonBar
+     * @return void
+     */
+    private function shortcutButton($buttonBar): void
     {
         $shortcutButton = $buttonBar->makeShortcutButton()
             ->setRouteIdentifier('wp_mailworkflow')
@@ -89,7 +91,13 @@ class QueueController extends ActionController
         $buttonBar->addButton($shortcutButton, ButtonBar::BUTTON_POSITION_RIGHT);
     }
 
-    private function recipientButton($buttonBar)
+    /**
+     * recipient menu Button
+     *
+     * @param $buttonBar
+     * @return void
+     */
+    private function recipientButton($buttonBar): void
     {
         // Queue Button:
         $url = $this->uriBuilder->reset()->uriFor('list', [], 'Recipient');
