@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace WEBprofil\WpMailworkflow\Controller;
 
 use TYPO3\CMS\Backend\Template\Components\ButtonBar;
+use TYPO3\CMS\Core\Http\RedirectResponse;
 use TYPO3\CMS\Core\Imaging\Icon;
 use TYPO3\CMS\Core\Imaging\IconFactory;
 use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
-use TYPO3\CMS\Extbase\Http\ForwardResponse;
 use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -97,16 +97,16 @@ class RecipientController extends ActionController
      * action create
      *
      * @param Recipient $newRecipient
-     * @return ForwardResponse
+     * @return RedirectResponse
      * @throws IllegalObjectTypeException
      */
-    public function createAction(Recipient $newRecipient): ForwardResponse
+    public function createAction(Recipient $newRecipient): RedirectResponse
     {
         $this->recipientRepository->add($newRecipient);
         $persistenceManager = GeneralUtility::makeInstance(PersistenceManager::class);
         $persistenceManager->persistAll();
         $this->createQueue($newRecipient);
-        return (new ForwardResponse('list'));
+        return new RedirectResponse($this->uriBuilder->uriFor('list'));
     }
 
     /**
@@ -138,24 +138,24 @@ class RecipientController extends ActionController
      * action update
      *
      * @param Recipient $recipient
-     * @return ForwardResponse
+     * @return RedirectResponse
      * @throws IllegalObjectTypeException
      * @throws UnknownObjectException
      */
-    public function updateAction(Recipient $recipient): ForwardResponse
+    public function updateAction(Recipient $recipient): RedirectResponse
     {
         $this->recipientRepository->update($recipient);
-        return (new ForwardResponse('list'));
+        return new RedirectResponse($this->uriBuilder->uriFor('list'));
     }
 
     /**
      * action delete
      *
      * @param Recipient $recipient
-     * @return ForwardResponse
+     * @return RedirectResponse
      * @throws IllegalObjectTypeException
      */
-    public function deleteAction(Recipient $recipient): ForwardResponse
+    public function deleteAction(Recipient $recipient): RedirectResponse
     {
         $queues = $this->queueRepository->findByRecipient($recipient);
         foreach ($queues as $queue) {
@@ -165,7 +165,7 @@ class RecipientController extends ActionController
             }
         }
         $this->recipientRepository->remove($recipient);
-        return (new ForwardResponse('list'));
+        return new RedirectResponse($this->uriBuilder->uriFor('list'));
     }
 
     /**

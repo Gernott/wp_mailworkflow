@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace WEBprofil\WpMailworkflow\Controller;
 
 use TYPO3\CMS\Backend\Template\Components\ButtonBar;
+use TYPO3\CMS\Core\Http\RedirectResponse;
 use TYPO3\CMS\Core\Imaging\Icon;
 use TYPO3\CMS\Core\Imaging\IconFactory;
 use Psr\Http\Message\ResponseInterface;
-use TYPO3\CMS\Extbase\Http\ForwardResponse;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
 use WEBprofil\WpMailworkflow\Domain\Model\Queue;
@@ -68,13 +68,13 @@ class QueueController extends ActionController
      * action delete
      *
      * @param Queue $queue
-     * @return ForwardResponse
+     * @return RedirectResponse
      * @throws IllegalObjectTypeException
      */
-    public function deleteAction(Queue $queue): ForwardResponse
+    public function deleteAction(Queue $queue): RedirectResponse
     {
         $this->queueRepository->remove($queue);
-        return (new ForwardResponse('list'));
+        return new RedirectResponse($this->uriBuilder->uriFor('list'));
     }
 
     /**
