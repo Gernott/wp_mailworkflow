@@ -23,8 +23,16 @@
         <f:for each="{queues}" as="queue">
             <tr>
                 <td>{queue.sendAt -> f:format.date(format:'d.m.Y H:i')}</td>
-                <td>{queue.recipient.firstName} {queue.recipient.lastName}</td>
-                <td><f:link.email email="{queue.recipient.email}"/></td>
+                <td>
+                    <f:if condition="{queue.recipient}">
+                        {queue.recipient.firstName} {queue.recipient.lastName}
+                    </f:if>
+                </td>
+                <td>
+                    <f:if condition="{queue.recipient}">
+                        <f:link.email email="{queue.recipient.email}"/>
+                    </f:if>
+                </td>
                 <td>{queue.recipient.mailGroup.title}: {queue.mail.title}</td>
                 <td>
                     <f:if condition="{queue.isSent}">
