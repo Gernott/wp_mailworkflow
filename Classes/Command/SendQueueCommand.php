@@ -2,16 +2,17 @@
 
 namespace WEBprofil\WpMailworkflow\Command;
 
+use Psr\Http\Message\ServerRequestInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Mime\Address;
 use TYPO3\CMS\Core\Core\Environment;
+use TYPO3\CMS\Core\Http\ServerRequestFactory;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 use WEBprofil\WpMailworkflow\Domain\Model\Queue;
 use WEBprofil\WpMailworkflow\Domain\Repository\QueueRepository;
@@ -120,6 +121,13 @@ class SendQueueCommand extends Command
             $queue->getRecipient()->getParameter5()
         ), $mailtext);
 
+        // Erstellen einer ServerRequest-Instanz für CLI:
+        /** @var ServerRequestInterface $request */
+        $request = GeneralUtility::makeInstance(ServerRequestFactory::class)->createServerRequest('GET', '/');
+        $request = $request->withAttribute('applicationType', 2);
+        $GLOBALS['TYPO3_REQUEST'] = $request;
+
+        // StandaloneView:
         $view = GeneralUtility::makeInstance(StandaloneView::class);
         $view->setTemplateRootPaths([GeneralUtility::getFileAbsFileName($input->getArgument('templatesPath'))]);
         $view->setPartialRootPaths([GeneralUtility::getFileAbsFileName($input->getArgument('partialsPath'))]);
