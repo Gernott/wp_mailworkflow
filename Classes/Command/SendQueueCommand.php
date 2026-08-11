@@ -24,9 +24,6 @@ use WEBprofil\WpMailworkflow\Domain\Model\Queue;
 use WEBprofil\WpMailworkflow\Domain\Model\Recipient;
 use WEBprofil\WpMailworkflow\Domain\Repository\QueueRepository;
 
-/**
- * GenerateInvoicesCommandController
- */
 class SendQueueCommand extends Command implements LoggerAwareInterface
 {
     use LoggerAwareTrait;
@@ -87,7 +84,7 @@ class SendQueueCommand extends Command implements LoggerAwareInterface
     }
 
     /**
-     *  GenerateInvoicesCommand
+     * Send due mails from the queue.
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
@@ -115,7 +112,7 @@ class SendQueueCommand extends Command implements LoggerAwareInterface
                 // A single broken mail must never abort the whole queue run, otherwise
                 // the already sent entries stay unmarked and are sent again and again.
                 $failed++;
-                $this->logger?->error('Could not render queued mail, skipping.', [
+                $this->logger?->error('Could not build queued mail message, retrying on next run.', [
                     'queue' => $queue->getUid(),
                     'mail' => $queue->getMail()->getUid(),
                     'recipient' => $queue->getRecipient()->getEmail(),
@@ -127,10 +124,12 @@ class SendQueueCommand extends Command implements LoggerAwareInterface
             try {
                 $this->mailer->send($email);
             } catch (\Throwable $exception) {
-                // Not delivered, so the entry stays in the queue and is retried next run.
+                // The mailer reported a failure, so the entry stays in the queue and is retried.
+                // The transport may still have accepted the message before reporting the failure.
                 $failed++;
                 $this->logger?->error('Could not send queued mail, retrying on next run.', [
                     'queue' => $queue->getUid(),
+                    'mail' => $queue->getMail()->getUid(),
                     'recipient' => $queue->getRecipient()->getEmail(),
                     'exception' => $exception,
                 ]);
@@ -138,8 +137,8 @@ class SendQueueCommand extends Command implements LoggerAwareInterface
             }
 
             try {
-                // Persist per entry, directly after delivery: whatever happens with the
-                // remaining entries, this mail can never be sent a second time.
+                // Persist per entry so a failure in a later entry cannot leave this delivered
+                // mail unmarked. A failure here can still cause a duplicate on the next run.
                 $queue->setIsSent(true);
                 $queue->setSent(new \DateTime());
                 $this->queueRepository->update($queue);
@@ -158,6 +157,10 @@ class SendQueueCommand extends Command implements LoggerAwareInterface
         }
 
         $io->writeln(sprintf('Sent %d mail(s), %d failure(s).', $sent, $failed));
+        $this->logger?->info('Queued mail run completed.', [
+            'sent' => $sent,
+            'failed' => $failed,
+        ]);
 
         return $failed > 0 ? Command::FAILURE : Command::SUCCESS;
     }
@@ -225,8 +228,7 @@ class SendQueueCommand extends Command implements LoggerAwareInterface
         // request: TYPO3\CMS\Frontend\Typolink\LinkFactory::createUri() hands
         // $GLOBALS['TYPO3_REQUEST'] to ContentObjectRenderer::setRequest(), which does not
         // accept null. On CLI that global is never set, so the rendering has to provide it.
-        // An existing request (scheduler run inside the backend) is kept untouched and
-        // restored afterwards.
+        // An existing request (scheduler run inside the backend) is left untouched.
         $globalRequestIsMissing = !($GLOBALS['TYPO3_REQUEST'] ?? null) instanceof ServerRequestInterface;
         if ($globalRequestIsMissing) {
             $GLOBALS['TYPO3_REQUEST'] = $request;
